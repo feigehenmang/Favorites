@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{margin: 0;
+        padding: 0;}
+        .con{
+            position: relative;
+            margin-left: 10px;
+            border:1px solid red;
+            height: 300px;
+        }
+        .box{
+            height: 200px;
+            width: 200px;
+            overflow: auto;
+            border: 1px solid black;
+            margin-top: 10px;
+            margin-left: 10px;
+            position: absolute;
+            top: 10px
+        }
+    </style>
+</head>
+<body style="height: 80000px">
+    <div class="con">
+        <div class="box">
+            <h1>heloo</h1>
+            <h1>heloo</h1>
+            <h1>heloo</h1>
+            <h1>heloo</h1>
+            <h1>heloo</h1>
+            <h1>heloo</h1>
+            <h1>heloo</h1>
+            <h1>heloo</h1>
+            <h1>heloo</h1>
+            <h1>heloo</h1>
+            <h1>heloo</h1>
+            <h1>heloo</h1>
+            <h1>heloo</h1>
+            <h1>heloo</h1>
+            <h1>heloo</h1>
+            <h1>heloo</h1>
+            <h1>heloo</h1>
+            <h1>heloo</h1>
+            <h1>heloo</h1>
+            <h1>heloo</h1>
+            <h1>heloo</h1>
+            <h1>heloo</h1>
+        </div>
+    </div>
+    <script>
+        var el = document.querySelector(".box");
+        el.onscroll = function(){
+            console.log(this.scrollTop)
+        }
+        document.onclick = function(e){
+            //可视部分宽高 不包括滚动条，外边距，但是包括内边距
+            // clientTop/Left 只发现和border相关
+            // console.log(el.clientWidth, el.clientHeight, el.clientTop)
+            // 包括滚动条 边框 内边距  不包括外边距
+            // offsetTop/left 指的是el相距它的offsetParent左边和右边的距离，包括position设置的top/left 以及自身的margintop/left
+            console.log(el.offsetWidth , el.offsetHeight, el.offsetTop, el.offsetLeft)
+            // 元素内部内容的实际宽度  当内容没有超过宽高时取不到
+            // console.log(el.scrollHeight, el.scrollWidth)
+            // scrollTop/Left 元素卷起的高度、宽度 可读写
+            // console.log(el.scrollTop, el.scrollLeft)
+            // obj.style.... 获取行内样式和修改行内样式、
+            // 获得最终计算好的样式  el.currentStyle[attr]
+            // console.log(getComputedStyle(el).width)
+            // event 
+            // clientX clientY 相对于浏览器左上角
+            //screenX/Y 相对于屏幕左上角
+            // e.offsetX, e.offsetY 相对于target的位置
+            //pageX和pageY clientX/Y+offsetTop/left
+            // console.log(e.pageX, e.pageY);
+            // console.log(e.clientX, e.clientY);
+            // console.log(e.pageY + window.screenTop)
+            // window.innerHeight outerHeight 浏览器可视区高度 浏览器在屏幕中所占的高度
+            // console.log(window.innerHeight, window.outerHeight)
+            // console.log(window.innerWidth, window.outerWidth)
+            // window.screen 
+            // window.screen.width/availWidth, window.screen.height/availHeight 屏幕宽高，和分辨率有关
+            // console.log(window.screen.width, window.screen.height)
+            // console.log(window.screen.availWidth, window.screen.availHeight)
+            // window.scrollTop/Left 浏览器相对于视窗的位置
+            // console.log(window.screenTop,window.screenLeft)
+            //获取可视区域的高度<br>
+            var clients = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+        }
+
+
+        function show() {
+                var showId = document.getElementById("box")
+                //兼容ie,获取可视区域的高度
+                var clients = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+                //获取滚动条scrollTop的高度
+                var scrollTop = document.body.scrollTop;
+                //获取整个滚动的高度
+                var wholeHeight = document.body.scrollHeight;
+                console.log(clients, scrollTop, wholeHeight)
+                //可视区域加上卷上去的部分等于整个网页的高度，滚到了底部
+                if (clients + scrollTop >= wholeHeight) {
+                    alert("我已经滚动底部了")
+                }
+                // //卷上去的部分等于0
+                // if (scrollTop == 0) {
+                //     alert("我已经是顶部了")
+                // }
+            }
+            // window.onscroll = show
+    </script>
+</body>
+</html>
