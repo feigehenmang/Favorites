@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		 <fieldset>
+			<legend>计算阶乘</legend>
+			<input id="input" type="number" placeholder="请输入一个正整数" />
+			<button id="btn">计算</button>
+			<p>计算结果：<span id="result"></span></p>
+		  </fieldset>
+		  <legend></legend>
+	</body>
+	<script>
+		 const input = document.getElementById('input');
+		const btn = document.getElementById('btn');
+		const result = document.getElementById('result');
+
+		btn.addEventListener('click', () => {
+		  const worker = new Worker('./worker.js');
+
+		  // 向 Worker 发送消息
+		  worker.postMessage(input.value);
+
+		  // 接收来自 Worker 的消息
+		  worker.addEventListener('message', e => {
+			result.innerHTML = e.data;
+
+			// 使用完 Worker 后记得关闭
+			worker.terminate();
+		  });
+	  })
+	</script>
+</html>

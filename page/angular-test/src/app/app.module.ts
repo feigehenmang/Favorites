@@ -11,7 +11,7 @@ import { BaseModule } from "./common/common.module";
   imports: [
     BrowserModule,
     AppRoutingModule,
-		NgZorroAntdModule,
+		// NgZorroAntdModule,
 		BaseModule
   ],
   providers: [],

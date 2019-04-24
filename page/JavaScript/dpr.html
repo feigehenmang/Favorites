@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			.outer{
+				height: 300px;
+				background: red;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="outer"></div>
+		<script>
+			// 会随屏幕缩小放大而变化,是每一逻辑像素对应的物理像素
+			console.log(`当前的dpr为:${window.devicePixelRatio}`);
+			// cssPx * dpr = screenPx
+			// 物理像素
+			console.log(window.screen.width);
+			console.log(window.screen.height);
+			//用dpr做一个宽度永远充满屏幕的盒子
+			var outer = document.querySelector(".outer"),
+				dpr = window.devicePixelRatio;
+			outer.style.width = window.screen.width/dpr + "px";
+			window.onresize = function(){
+				outer.style.width = window.screen.width/dpr + "px";
+			}
+		</script>
+	</body>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<meta http-equiv="Cache-Control" content="no-siteapp">
+		<meta name="format-detection" content="telephone=no, email=no">
+	</head>
+
+	<body>
+		<div id="app"></div>
+		<script>
+			(function() {
+				window.onload = function() {
+					var e = document.documentElement.clientWidth;
+					if (e > 640) e = 640;
+					document.documentElement.style.fontSize = e / 7.5 + "px"
+				};
+
+				function e(e) {
+					var t = new RegExp("(?:\\?|&)" + e + "=([^&]*)(?:&|$)", "i");
+					var n = window.location.href.match(t);
+					if (n != null) return unescape(n[1]);
+					return ""
+				}
+
+				function t(e, t, n, o) {
+					var i = null;
+					if (window.XMLHttpRequest) {
+						i = new XMLHttpRequest
+					} else if (window.ActiveXObject) {
+						i = new ActiveXObject("Microsoft.XMLHTTP")
+					}
+					if (i != null) {
+						var r = e;
+						i.onreadystatechange = function() {
+							if (i.readyState == 4) {
+								if (i.status >= 200 && i.status < 300 || i.status == 304) {
+									var r = i.responseText;
+									if (o == "json") {
+										var a = {};
+										try {
+											a = JSON.parse(r)
+										} catch (t) {
+											console.error("JSON decode error", e)
+										}
+										t && t(a)
+									} else {
+										t && t(r)
+									}
+								} else {
+									var r = i.responseText;
+									n && n(r)
+								}
+							}
+						};
+						i.open("GET", r, true);
+						i.setRequestHeader("Accept", "*/*");
+						i.send()
+					}
+				}
+
+				function n(e, t) {
+					var n = document.getElementsByTagName("head")[0];
+					var o = document.createElement("script");
+					o.type = "text/javascript";
+					o.src = e;
+					o.onload = function() {
+						t && t()
+					};
+					n.appendChild(o)
+				}
+
+				function o() {
+					if (/QQ/i.test(window.navigator.userAgent) || /MicroMessenger/i.test(window.navigator.userAgent)) {
+						n("//qzonestyle.gtimg.cn/qzone/qzact/common/share/share.js", function() {
+							window._wxReady = true;
+							if (window._setShare) {
+								window._setShare()
+							}
+						})
+					}
+					var o = e("modelId");
+					t("/templet/model?model_id=" + o, function(e) {
+						if (e.error_no == 0) {
+							var t = e.result;
+							i(t.model_name);
+							window.__modelData = t.model_content;
+							n(t.model_js)
+						}
+					}, function() {
+						console.log("error")
+					}, "json")
+				}
+
+				function i(e) {
+					document.title = e;
+					var t = document.createElement("iframe");
+					t.src = "//m.baidu.com/favicon.ico";
+					t.style.display = "none";
+					t.onload = function() {
+						setTimeout(function() {
+							t.remove()
+						}, 16)
+					};
+					document.body.appendChild(t)
+				}
+				o()
+			})();
+		</script>
+	</body>
+
+</html>
+<!--8793069585235986003600421642041117-->
+<script>
+	var _trace_page_logid = 879306958523598600;
+</script>
