@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+			// 未来七天
+			var nextWeek = [...new Array(7).keys()]
+			.map(days=>new Date(Date.now() + (1000*60*60*24) * days).toLocaleString());
+// 			console.log(Date.now());//number
+// 			console.log(new Date().getTime());
+// 			console.log(nextWeek)
+			console.log(Math.random().toString(36).substring(2))
+		</script>
+	</body>
+</html>
