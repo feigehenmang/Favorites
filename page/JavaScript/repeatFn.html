@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function repeat(fn){
+            return function(args){
+                var isContinue = fn(args);
+                if (isContinue) {
+                    fn(args)
+                } else {   
+                    return false;
+                }
+            }
+        };
+        var array = [
+            {
+                index:0,
+                children:[
+                    {index:1,name:"a-b"},
+                    { index: 2, name: "a-c" },
+                    { index: 3, name: "a-d" },
+                    {index:4,name:"a-3"},
+                ],
+                name: "a"
+            }
+        ]
+    </script>
+</body>
+</html>
