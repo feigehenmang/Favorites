@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+			// jquery 大概是这么做的
+			(function(factory){
+				window.$ = window.jQuery = factory();
+			})(function(){
+				// 这个是jquery的工厂函数
+				var jQuery = {};
+				jQuery.version = "0.0.1";
+				//some code
+				return jQuery;
+			})
+		</script>
+		<script>
+			console.log($.version)
+			// factory
+			// 类似于jquery,有一个jquery对象,往上面添加方法
+// 			function peopleFactory(){
+// 				var people = {};
+// 				people.name = "Max";
+// 				people.age = 18;
+// 				people.sayHello = function(){
+// 					alert(this.name);
+// 				};
+// 				return people;
+// 			};
+// 			var p1 = peopleFactory();
+// 			p1.sayHello();
+// 			console.log(p1 instanceof Object)
+			// 工厂函数的优缺点
+			/**
+			 * 优点： 确实创建了对象，在封装类库时比较常用，因为类库比较相对独立
+			 * 缺点：无法准确的识别对象，无法继承，导致无用代码太多
+			 */
+			/*
+			function People(){};
+			People.prototype.name = "Max";
+			People.prototype.sayHello = function(){
+				alert(this.name);
+			};
+			var p1 = new People();
+			p1.sayHello();
+			*/
+			/**
+			 * 优点：代码复用率高，可以通过prototype继承
+			 * 缺点：people不可以有特定属性，所有属性都一样
+			 */
+			function People(opt){
+				this.name = opt.name;
+				this.age = opt.age;
+			}
+			People.prototype.sayHello = function(){
+				alert(this.name);
+			}
+			var p1 = new People({
+				name: "Max",
+				age: 19
+			});
+			p1.sayHello();
+			
+		</script>
+	</body>
+</html>

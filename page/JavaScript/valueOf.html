@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>    
+        var data = {
+            valueOf: function(){
+                console.log("valueOf");
+                return "12";
+            },
+            toString: function(){
+                console.log("toString");
+                return "1";
+            },
+            [Symbol.toPrimitive]: function(){
+                console.log(Symbol.toPrimitive);
+                return 2;
+            }
+        }
+        console.log(data + 1);
+        /* 
+        涉及到引用类型计算或者需要转换类型时
+            这个对象上的Symbol.toPrimitive方法定义了他的转换规则，即最终的值是多少
+            如果没有定义该方法，就要判断转换什么类型
+            - 如果已经是原始类型，则返回当前值
+            - 如果需要转字符串，则先调用toString方法，如果此时是原始类型则直接返回，不是在调用valueOf方法并返回结果
+            - 如果不是 字符串，则先调用valueOf方法，如果此时是 原始类型 则直接返回，否则再调用toString方法并返回结果
+            - 如果都没有 原始类型 返回，则抛出 TypeError类型错误。
+        
+        
+         */
+    </script>
+</body>
+</html>

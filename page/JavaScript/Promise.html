@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+			function MyPromise(fn){
+				this.__status = "";
+				this.runStack = [];
+				this.result = null;
+				// 由对象实例调用，this指向实例，像下面这样调用，this指向window
+				fn.call(this, this.success.bind(this), this.error.bind(this));
+			}
+			MyPromise.prototype.success = function(res){
+				this.__status = "success";
+				this.result = res;
+				this.runStack.forEach(fn=>fn(this.result));
+			}
+			MyPromise.prototype.error = function (res) {
+				this.__status = "error";
+				this.result = res;
+				this.runStack.forEach(fn => fn(this.result));
+			}
+			MyPromise.prototype.then = function (fn) {
+				if(this.__status === "success"){
+					fn(this.result);
+				}else if(this.__status === "error"){
+					fn(this.result);
+				}else{
+					this.runStack.push(fn);
+				}
+				// return new MyPromise(fn)
+			}
+			var p1 = new MyPromise(function(reslove, reject){
+				setTimeout(function(){
+					reslove(12);
+				},1000);
+			});
+			p1.then(function(x){
+				console.log(x);
+			})
+		</script>
+	</body>
+</html>

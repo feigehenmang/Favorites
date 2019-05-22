@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+			function jsonStringify(json){
+				var type = typeof json;
+				if(type !== 'object'){
+					if(/string|undefined|function/.test(type)){
+						json = '"' + json + '"';
+					}
+					return String(json);
+				}else{
+					var obj = [];
+					
+				}
+			}
+			
+			
+			function isType(checkType){
+				return function(target){
+					return Object.prototype.toString.call(target) === "[object " + checkType + "]";
+				}
+			}
+			var checkString = isType("String");
+			var checkFunction = isType("Function");
+			console.log(checkFunction(function(){}))
+		</script>
+	</body>
+</html>

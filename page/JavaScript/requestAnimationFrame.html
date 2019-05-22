@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			*{
+				margin: 0;padding: 0;
+			}
+			.box{
+				position: absolute;
+				width: 100px;
+				height: 100px;
+				background: red;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="box"></div>
+		<script type="text/javascript">
+			console.log(requestAnimationFrame);
+			var box = document.querySelector(".box");
+			function step(){
+				var newPosition = parseInt(getComputedStyle(box).left);
+				console.log(newPosition)
+				box.style.left = newPosition + 1 + 'px';
+				if(newPosition <= 1000){
+					requestAnimationFrame(step);
+				}
+			}
+			requestAnimationFrame(step)
+		</script>
+	</body>
+</html>
