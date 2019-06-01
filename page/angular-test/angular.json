@@ -34,7 +34,9 @@
               "node_modules/devextreme/dist/css/dx.common.css",
               "node_modules/devextreme/dist/css/dx.light.css"
             ],
-            "scripts": [],
+            "scripts": [
+              "src/assets/js/config.js"
+            ],
             "es5BrowserSupport": true
           },
           "configurations": {

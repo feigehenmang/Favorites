@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+			}
+			.box, .content{
+				float: left;
+				width: 400px;
+				overflow: hidden;
+				margin-right: 10px;
+				background: gray;
+				min-height: 300px;
+			}
+			.item{
+				float: left;
+				margin: 5px;
+				background: #fff;
+				width: 50px;
+				height: 50px;
+				text-align: center;
+				line-height: 50px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="box">
+			<div class="item"></div>
+		</div>
+		<div class="content">
+			<div class="item"></div>
+		</div>
+		<script type="text/javascript">
+			var clickBox = document.querySelector(".box"), content = document.querySelector(".content");
+			var data = [
+				[10,11,12,13,14],
+				[]
+			];
+			function renderSpecial(dataLeft, dataRight){
+				render(dataLeft, clickBox);
+				render(dataRight, content);
+				var clickItems = [].slice.call(clickBox.querySelectorAll(".item"));
+				clickItems.forEach(function(item){
+					item.addEventListener("click",function(e){
+						var index = e.target.getAttribute("data-index");
+						var value = e.target.innerText;
+						data[0].splice(index,1);
+						data[1].push(Number(value));
+						renderSpecial(data[0], data[1]);
+					}) 
+				});
+				var rightItems = [].slice.call(content.querySelectorAll(".item"));
+				rightItems.forEach(function(item){
+					item.addEventListener("click",function(e){
+						var index = e.target.getAttribute("data-index");
+						var value = e.target.innerText;
+						data[1].splice(index,1);
+						data[0].push(Number(value));
+						renderSpecial(data[0], data[1]);
+					}) 
+				});
+			}
+			function render(dataSource, target){
+				target.innerHTML = "";
+				var html = "";
+				for (var i = 0; i < dataSource.length; i++) {
+					html += "<div class='item' data-index="+i+" >"+dataSource[i]+"</div>";
+				}
+				target.innerHTML = html;
+			}
+			renderSpecial(data[0], data[1]);
+			
+			
+		</script>
+	</body>
+</html>
