@@ -1,5 +1,13 @@
-
+<h2>
+    {{nullText}}
+</h2>
 <button nz-button nzType="primary">Primary</button>
 <button nz-button nzType="default">Default</button>
 <button nz-button nzType="dashed">Dashed</button>
 <button nz-button nzType="danger">Danger</button>
+<dx-data-grid
+    id="gridContainer"
+    [dataSource]="customers"
+    [columns]="['CompanyName', 'City', 'State', 'Phone', 'Fax', 'Address']"
+    [showBorders]="true">
+</dx-data-grid>

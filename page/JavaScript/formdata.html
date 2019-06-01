@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<form action="" id="form">
+			<input type="file" name="file" id="file"/>
+		</form>	
+		<script type="text/javascript">
+			var file = document.querySelector("#file");
+			file.onchange = function(){
+				var form = new FormData(document.forms[0]);
+				console.log(form.get('file'));
+				console.log(form.__proto__);
+				form.delete("file");
+				console.log(form.get("file"))
+			}
+			
+		</script>
+	</body>
+</html>

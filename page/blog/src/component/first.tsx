@@ -6,6 +6,7 @@ export interface Props {
 }
 
 export default class First extends React.Component<Props, object> {
+  props: Props;
   render() {
     const { name, enthusiasmLevel = 1 } = this.props;
 

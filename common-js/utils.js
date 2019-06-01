@@ -10,7 +10,7 @@ var NiceUtils = (function(){
 //             }
 //             return "?" + paramArray.join("&");
         },
-		htmlItem: ["<", ">", " ", "<img />", "<img", "/>", "<script" "</script>"],
+		htmlItem: ["<", ">", " ", "<img />", "<img", "/>", "<script", "</script>"],
 		baseItem: ["&lt;", "&gt;", "&nbsp;", "&lt;img /&gt;", "&lt;img", "/&gt;", "&lt;script", "&lt/script&gt;" ],
 		htmlToBase: function(str){
 			return this.htmlItem.reduce(
