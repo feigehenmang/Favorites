@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>JS FOR</title>
+</head>
+<body>
+    <script>
+    let simpleColors = {
+        colorA: 'white',
+        colorB: 'black'
+    };
+    let natureColors = {
+        colorC: 'green',
+        colorD: 'yellow'
+    };
+    console.log(Object.setPrototypeOf(
+        /* target */ natureColors, 
+        /*将target.__proto__指向simpleColors*/ simpleColors));
+    //返回自身可枚举属性键组成的数组，natureColors包含从simpleColors原型对象继承的属性，但是Object.keys()函数会跳过它们
+    console.log(Object.keys(natureColors)); // => ['colorC', 'colorD']
+    console.log(natureColors["colorA"]); //white
+    //Object.values() 和 Object.entries() 也都是返回一个给定对象自身可枚举属性的键值对数组
+    // for in 与上述语法的区别
+    for (const key in natureColors) {
+        console.log(key, natureColors[key]);
+        /**
+        * colorC green
+        * colorD yellow
+        * colorA white
+        * colorB black
+        **/
+    }
+    </script>
+</body>
+</html>
