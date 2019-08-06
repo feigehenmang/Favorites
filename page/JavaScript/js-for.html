@@ -23,7 +23,7 @@
     console.log(Object.keys(natureColors)); // => ['colorC', 'colorD']
     console.log(natureColors["colorA"]); //white
     //Object.values() 和 Object.entries() 也都是返回一个给定对象自身可枚举属性的键值对数组
-    // for in 与上述语法的区别
+    // for in 与上述语法的区别 for in 不仅会循环自身可枚举属性，还包括原型链上的属性
     for (const key in natureColors) {
         console.log(key, natureColors[key]);
         /**
