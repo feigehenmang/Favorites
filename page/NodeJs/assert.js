@@ -5,6 +5,7 @@ function add(a, b){
 // console.log(assert);
 assert.equal(6, add(3, 3), '预期3+3=6');
 /*
+
 { [Function: ok]
   fail: [Function: fail],
   AssertionError: [Function: AssertionError],
@@ -41,6 +42,4 @@ assert.equal(6, add(3, 3), '预期3+3=6');
      doesNotReject: [AsyncFunction: doesNotReject],
      ifError: [Function: ifError],
      strict: [Circular] } }
-
-
 */
