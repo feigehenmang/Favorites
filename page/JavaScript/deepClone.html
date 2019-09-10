@@ -8,7 +8,67 @@
 </head>
 <body>
     <script>
-    
+    let p = {
+        isSleep: true,
+        status: ""
+    };
+    let _isSleep = true;
+    Object.defineProperties(p, {
+        "isSleep": {
+            set: function(val){
+                // console.log(val);
+                p.status = val ? "sleep" : "not sleep";
+                _isSleep = val;
+            },
+            get: function(){
+                return _isSleep;
+            }
+        }
+    });
+    // console.log(p.status);
+    // p.isSleep = false;
+    // console.log(p.status);
+    let name = 'ConardLi';
+    function changeValue(name){
+      name = 'code秘密花园';
+    }
+    changeValue(name);
+    // console.log(name);
+    let str = "Lili";
+    let symbol1 = Symbol(str);
+    let symbol2 = Symbol(str);
+    let symbol3 = Symbol({});
+    let symbol4 = Symbol.for(str);
+    let symbol5 = Symbol.for(str);
+    // console.log("symbol info: ", symbol1, symbol2, symbol3, symbol4);
+    // console.log("Lili diff: ", symbol1 == symbol2);
+    // console.log("Symbol.for diff: ", symbol5 == symbol4);
+
+    let obj = {
+        i: 0,
+        valueOf: function(){
+            console.log('valueOf: ', arguments);
+            return {};
+        },
+        toString: function(){
+            console.log('toString: ', arguments);
+            return "";
+        },
+        [Symbol.toPrimitive]: function(){
+            console.log('Symbol.toPrimitive: ', arguments);
+            return 1;
+        }
+    }
+    // console.log(obj == 1); // 第一次执行 i 为 0
+    // console.log(obj == 1); // 第二次执行 i 为 1
+    // console.log(obj+"1")
+
+    var num = new Number(123);
+    console.log(typeof num); //object
+    console.log(typeof num.valueOf()); //number
+    var stri = new String("123");
+    console.log(typeof stri); //object
+    console.log(typeof stri.toString()) //string
     </script>
 </body> 
 </html>
