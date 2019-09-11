@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		var length = 10;
+		function fn() {
+		    console.log(this.length);
+		}
+		 
+		var obj = {
+		  length: 5,
+		  method: function(fn) {
+		    fn();
+		    arguments[0]();
+		  }
+		};
+		 
+		obj.method(fn, 1);//输出是什么？
+
+		/*function testCall(){
+			console.log(this);
+			console.log(this instanceof String);
+		}
+		var str = "123";
+		// var str1 = new String("123");
+		// console.log(str);
+		// testCall();
+		// testCall.call(str);
+		// testCall.apply(str);
+		// console.log(str);
+		var testBind = testCall.bind(str);
+		console.log(testBind)
+		testBind.apply(window);
+		console.log(()=>{})*/
+	</script>
+</body>
+</html>
