@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Writing Mode</title>
+	<style>
+		* {
+		  box-sizing: border-box;
+		}
+		body {
+		  font: 1.4em/1.3 "Gill Sans", "Gill Sans MT", Calibri, sans-serif;
+		  margin: 2em 3em;
+		}
+		.wrapper {
+		  border: 5px dotted black;
+		  inline-size: 200px;
+		  writing-mode: horizontal-tb;
+		  margin-bottom: 1em;
+		}
+		.box {
+		  background-color: rgb(55,55,110);
+		  color: white;
+		  padding: 20px;
+		  border-radius: .5em;
+		  margin-block-start: 30px;
+		  margin-block-end: 10px;
+		  margin-inline-start: 2em;
+		  margin-inline-end: 5%;
+		}
+
+	</style>
+</head>
+<body>
+	<div class="wrapper">
+		<div class="box">
+			 A box with a horizontal-tb writing mode.
+		</div>
+	</div>
+</body>
+</html>
