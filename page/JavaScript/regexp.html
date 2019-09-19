@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		// 精确匹配
+		// console.log("hello".match(/hello/));
+		// console.log(/hello/.test("hello"));
+		// // 纵向模糊匹配
+		// console.log(/a[123]b/.test("a1b"));
+		// // 横向模糊匹配
+		// console.log(/1a{1,3}b/.test("1b"));
+		// console.log(/1a{1,3}b/.test("1ab"));
+		// console.log(/1a{1,3}b/.test("1aab"));
+		// console.log(/1a{1,3}b/.test("1aaab"));
+		// 贪婪匹配 懒惰匹配
+		var regexpGreedy = /\d{2,5}/g;
+		var regexpLazy = /\d{2,5}?/g;
+		console.log("贪婪", "123 1234 12345 123456".match(regexpGreedy));// 贪婪 (4) ["123", "1234", "12345", "12345"]
+		console.log("懒惰", "123 1234 12345 123456".match(regexpLazy));//懒惰 (8) ["12", "12", "34", "12", "34", "12", "34", "56"]
+	</script>
+</body>
+</html>

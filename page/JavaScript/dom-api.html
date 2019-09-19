@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		.popup {
+			width: 300px;
+			height: 300px;
+			border: 1px solid #ccc;
+			background: gray;
+			position: fixed;
+		}
+		.popup span {
+			padding: 10px;
+			background: orange;
+			float: right;
+		}
+	</style>
+</head>
+<body>
+	<div class="app">
+		<div class="popup" style="display: none;">
+			<span>close</span>
+		</div>
+	</div>
+	<div class="drag popup"></div>
+	<script>
+		var app = document.querySelector(".app");
+		var popup = document.querySelector(".popup");
+		var drag = document.querySelector(".drag");
+
+
+		drag.addEventListener("mousedown",function(e){
+			console.log(drag.getBoundingClientRect())
+			var old_left = e.clientX - drag.getBoundingClientRect().left;
+			var old_top = e.clientY - drag.getBoundingClientRect().top;
+			drag.onmousemove = function(e){
+				drag.style.left = e.clientX - old_left + 'px';
+				drag.style.top = e.clientY - old_top + 'px';
+			}
+			drag.onmouseup = function(){
+				console.log(1);
+				drag.onmousemove = drag.onmousedown = null;
+			}
+		})
+
+		// 监听
+		var observer = new MutationObserver((change, observer$) => {
+			console.log(change);
+		});
+		// console.log(observer);
+		observer.observe(app, {childList: true, subtree: true});
+		document.onclick = function(e){
+			if(!popup.contains(e.target) || e.target.nodeName == "SPAN"){
+				popup.style.display = popup.style.display == "block" ? "none":"block";
+			}
+				// popup.style.display = popup.style.display == "block" ? "none":"block";
+			// console.log(e.target.compareDocumentPosition(popup));
+			// if(!e.target.compareDocumentPosition(popup) || e.target.nodeName == "SPAN"){
+			// }
+			var $div = document.createElement("div");
+			$div.innerHTML = Math.random();
+			app.appendChild($div);
+		};
+	</script>
+</body>
+</html>

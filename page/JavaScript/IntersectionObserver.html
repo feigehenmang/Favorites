@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {margin: 0;
+        padding: 0;}
+
+        .target {
+            height: 10000px;
+            background: grey;
+            margin-top: 1000px;
+        }
+        .header {
+            position: fixed;
+            top:0;
+            right: 0;
+            width: 30px;
+            height: 30px;
+            background: pink;
+        }
+        .footer {
+            height: 150px;
+            background: #ccc;
+        }
+    </style>
+</head>
+<body>
+    <div class="header"></div>
+    <div class="outer">
+        <div class="target"></div>
+    </div>
+    <div class="footer">
+        @CopyRight
+    </div>
+    <script>
+        // console.log(IntersectionObserver.root);   
+        let query = {
+            cachs: {},
+            insertAdjacentElementType: {
+                push: "beforeend",
+                unshift: "afterbegin",
+                after: "afterend",
+                begin: "beforebegin"
+            },
+            getEl: (selector) => {
+                if(query.cachs[selector]){
+                    return selector;
+                }else{
+                    let el = document.querySelector(selector);
+                    if(el){
+                        return document.querySelector(selector);
+                    }else{
+                        let div = document.createElement("div");
+                        div.className = selector.substring(1);
+                        return div;
+                    }
+                }
+            }
+        }
+        let intersectionObserver = new IntersectionObserver(function(entries){
+            console.log(entries);
+            entries.map(entrie => {
+                let header_color = entrie.isIntersecting ? "green" : "pink";
+                if(entrie.target.className == 'target') {
+                    // console.log("header 绿了");
+                    query.getEl(".header").style.backgroundColor = header_color;
+                }
+                if(entrie.target.className == 'footer') {
+                    setTimeout(() => {
+                        renderContent();
+                    }, 1000);
+                    // console.log("header 绿了");
+                // query.getEl(".header").style.backgroundColor = header_color;
+                }
+
+            })
+            // if(entries.target.className == 'target' && entries.)
+            /* 
+            time：可见性发生变化的时间，是一个高精度时间戳，单位为毫秒
+            target：被观察的目标元素，是一个 DOM 节点对象
+            rootBounds：根元素的矩形区域的信息，getBoundingClientRect()方法的返回值，如果没有根元素（即直接相对于视口滚动），则返回null
+            boundingClientRect：目标元素的矩形区域的信息
+            intersectionRect：目标元素与视口（或根元素）的交叉区域的信息-> 当前视口内包含多少该元素的区域
+            intersectionRatio：目标元素的可见比例，即intersectionRect占boundingClientRect的比例，完全可见时为1，完全不可见时小于等于0
+            */
+        });
+        console.log(intersectionObserver);
+        intersectionObserver.observe(query.getEl(".target"));
+        intersectionObserver.observe(query.getEl(".footer"));
+        function renderContent(){
+            let div = query.getEl("add");
+            console.log(div);
+            div.style.backgroundColor = `rgb(${radom(0,256)},${radom(0,256)},${radom(0,256)})`;
+            div.style.height = "1000px";
+            console.log(query.getEl("outer"))
+            query.getEl(".outer").insertAdjacentElement(query.insertAdjacentElementType.push, div);
+        };
+
+        function radom(n, m){
+            return parseInt(Math.random()*(m-n) + n);
+        }
+
+        /*
+            Math.random => 0 -1
+            random * 256 0-256
+            3-4
+
+
+        */
+        // renderContent()
+        // intersectionObserver.observe(document.querySelector(".header"));
+    </script>
+</body>
+</html>
