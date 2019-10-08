@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Canvas Wave</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        canvas {
+            /* background; */
+            display: block;
+            margin: 30px auto;
+        }
+    </style>
+</head>
+<body>
+    <canvas class="target"></canvas>
+    <script>
+    const canvas = document.querySelector('.target');
+    canvas.height = 500;
+    canvas.width = 500;
+    const ctx = canvas.getContext('2d');
+    let xOffset = 0;
+    let norange = 0;
+    // drawMySelf(ctx);
+    drawCircle(ctx);
+    drawMove(ctx);
+    // drawMove(ctx, 20);
+    function drawMove(ctx, offset){
+        const speed = .1;
+        ctx.clearRect(0,0,500,500);
+        drawMySelf(ctx, xOffset, norange);
+        xOffset += speed;
+        if(!(norange > 250)){
+            norange += 1;
+        }
+        requestAnimationFrame(drawMove.bind(null, ctx));
+    }
+    function draw(ctx, offset){
+        const points = []; // 位置记录;
+        const canvasWidth = 500; // canvas 的 宽
+        const canvasHeight = 500; // canvas 的 高
+         const startX = 0;
+         const waveWidth = 0.05; // 波浪宽度,数越小越宽
+         const waveHeight = 20; // 波浪高度,数越大越高
+         const xOffset = offset || 0; // 水平位移
+
+         ctx.beginPath();
+        //  console.log(20/canvasWidth)
+         for (let x = startX; x < startX + canvasWidth; x +=20 / canvasWidth) {
+        //    console.log(x);
+           const y=waveHeight * Math.sin((startX + x) * waveWidth + xOffset);
+           points.push([x, (canvasHeight / 2) + y]);
+           ctx.lineTo(x, (canvasHeight / 2) + y);
+           }
+           ctx.lineTo(canvasWidth, canvasHeight);
+           ctx.lineTo(startX, canvasHeight);
+           ctx.lineTo(points[0][0], points[0][1]);
+           ctx.stroke();
+    }
+
+    function drawMySelf(ctx, offset, norange = 0){
+        const points = []; // 位置记录;
+        const canvasWidth = 500; // canvas 的 宽
+        const canvasHeight = 500; // canvas 的 高
+        const startX = 0;
+        const waveWidth = 0.05; // 波浪宽度,数越小越宽
+        const waveHeight = 20; // 波浪高度,数越大越高
+        const xOffset = offset || 0; // 水平位移
+
+        ctx.beginPath();
+        // console.log(norange);
+
+        for (let x = startX; x < startX + canvasWidth; x+=0.1) {
+        // console.log(x);
+            const y = waveHeight * Math.sin((startX + x) * waveWidth + xOffset);
+            points.push([x, (canvasHeight) + y - norange]);
+            ctx.lineTo(x, (canvasHeight) + y - norange);
+        }
+        ctx.lineTo(canvasWidth, canvasHeight);
+        ctx.lineTo(startX, canvasHeight);
+        ctx.lineTo(points[0][0], points[0][1]);
+        ctx.stroke();
+        // console.log(points);
+      }
+    
+
+    function drawCircle(ctx){
+        const r = 500/2;
+        const lineWidth = 5;
+        const cr = r - lineWidth;
+        ctx.beginPath();
+        ctx.arc(r, r, cr, 0, 2 * Math.PI);
+        ctx.stroke();
+        ctx.clip();
+    }
+    // y = 波浪高度 * sin(x * 波浪宽度 + 水平位移)
+
+    ctx.beginPath();
+    ctx.lineTo(0,0);
+    ctx.lineTo(500,500);
+    ctx.stroke();
+    </script>
+</body>
+</html>
