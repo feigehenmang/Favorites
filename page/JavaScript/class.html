@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Class 和 function 有什么不同</title>
+</head>
+<body>
+    <script>
+        // class Foo {
+        //     constructor(){
+        //         name = 42;
+        //     }
+        // };
+        // var f1 = new Foo();
+        // 引用一个未声明的变量
+        function Bar() {
+        this.bar = 42;
+        }
+        Bar.answer = function() {
+        return 42;
+        };
+        Bar.prototype.print = function() {
+        console.log(this.bar);
+        };
+        const barKeys = Object.keys(Bar); // ['answer']
+        const barProtoKeys = Object.keys(Bar.prototype); // ['print']
+
+        class Foo {
+        constructor() {
+            this.foo = 42;
+        }
+        static answer() {
+            return 42;
+        }
+        print() {
+            console.log(this.foo);
+        }
+        }
+        const fooKeys = Object.keys(Foo); // []
+        const fooProtoKeys = Object.keys(Foo.prototype); // []
+    </script>
+</body>
+</html>
